@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  nestjs-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: nestjs-server
+    ports:
+      - "3000:3000"
+    environment:
+      - GOOGLE_SOLAR_API_URL=${GOOGLE_SOLAR_API_URL}
+      - GOOGLE_SOLAR_API_KEY=${GOOGLE_SOLAR_API_KEY}
