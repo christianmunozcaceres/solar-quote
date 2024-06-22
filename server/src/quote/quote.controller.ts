@@ -21,8 +21,10 @@ export class QuoteController {
 
     const materialCosts = panelCount * panel.priceUSD + inverter.priceUSD;
 
+    // This should be editable in some service
     const labourCosts = 7950;
 
+    // This should be editable in some service
     const markupPercentage = 0.2;
 
     const totalCost = (materialCosts + labourCosts) * (1 + markupPercentage);
