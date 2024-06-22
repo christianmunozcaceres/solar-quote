@@ -11,3 +11,17 @@ services:
     environment:
       - GOOGLE_SOLAR_API_URL=${GOOGLE_SOLAR_API_URL}
       - GOOGLE_SOLAR_API_KEY=${GOOGLE_SOLAR_API_KEY}
+      - MONGODB_URI=${MONGODB_URI}
+    depends_on:
+      - mongo-db
+
+  mongo-db:
+    image: mongo:latest
+    container_name: mongo-db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
