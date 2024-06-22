@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import axios, { AxiosInstance } from 'axios';
+import { BuildingInsightsResponse } from './google-solar.types';
 
 @Injectable()
 export class GoogleSolarService {
@@ -15,8 +16,11 @@ export class GoogleSolarService {
       baseURL,
     });
   }
-  async getBuildingInsights(lat: number, long: number) {
-    const { data } = await this.axiosClient.get(
+  async getBuildingInsights(
+    lat: number,
+    long: number,
+  ): Promise<BuildingInsightsResponse> {
+    const { data } = await this.axiosClient.get<BuildingInsightsResponse>(
       '/buildingInsights:findClosest',
       {
         params: {
