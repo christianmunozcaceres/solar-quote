@@ -4,4 +4,5 @@ Fuck yea
 
 ## tasks
 
-- fix docker compose and deploy to DigitalOcean App Platform
+- Switch from mongodb to firestore
+- re-deploy service in cloud run using firestore
