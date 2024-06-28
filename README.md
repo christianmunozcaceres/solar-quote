@@ -1,9 +1,7 @@
 # Solar Quote Project
 
-Fuck yea
+An application where you can fill in your address and get an automated quotation for a solar installation!
 
-## tasks
+[Server](./server/)
 
-IT'S FUCKING DEPLOYYYEEEEEEEEEDDDD MOTHERFUCKERERERRRRRRRRR
-
-(document some stuff like infrastructure, local setup (delete docker-composes etc))
+## To Do
