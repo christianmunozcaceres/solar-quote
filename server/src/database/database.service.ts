@@ -4,6 +4,7 @@ import { CollectionReference, getFirestore } from 'firebase-admin/firestore';
 import { ConfigService } from '@nestjs/config';
 import { apps, credential } from 'firebase-admin';
 import * as path from 'path';
+import { QuoteDTO } from './database.schemas';
 
 @Injectable()
 export class DatabaseService {
@@ -29,11 +30,18 @@ export class DatabaseService {
   async createQuote(input: {
     address: string;
     totalPrice: number;
-  }): Promise<any> {
-    return await this.collection.add(input);
+  }): Promise<QuoteDTO> {
+    const result = await this.collection.add(input);
+    return { id: result.id, ...input };
   }
 
-  async getAllQuotes(): Promise<any> {
-    return await this.collection.get();
+  // Can I remove any type?
+  async getAllQuotes(): Promise<any[]> {
+    const snapshot = await this.collection.get();
+    const result: any[] = [];
+    snapshot.forEach((doc) => {
+      result.push({ id: doc.id, ...doc.data() });
+    });
+    return result;
   }
 }

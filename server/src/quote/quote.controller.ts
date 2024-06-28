@@ -37,12 +37,13 @@ export class QuoteController {
 
     const totalCost = (materialCosts + labourCosts) * (1 + markupPercentage);
 
-    await this.database.createQuote({
+    const id = await this.database.createQuote({
       address: buildingAddress,
       totalPrice: totalCost,
     });
 
     return {
+      id,
       buildingAddress,
       material: [
         { name: panel.name, pricePerUnit: panel.priceUSD, count: panelCount },

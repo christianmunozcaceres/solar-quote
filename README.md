@@ -4,5 +4,6 @@ Fuck yea
 
 ## tasks
 
-- Switch from mongodb to firestore
-- re-deploy service in cloud run using firestore
+IT'S FUCKING DEPLOYYYEEEEEEEEEDDDD MOTHERFUCKERERERRRRRRRRR
+
+(document some stuff like infrastructure, local setup (delete docker-composes etc))
