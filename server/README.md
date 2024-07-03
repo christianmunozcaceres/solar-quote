@@ -1,4 +1,4 @@
-# Solar Quote - Server
+# Simple Solar Quote - Server
 
 This is the backend part of the Solar Quote application. It is built using NestJS together with Firestore as a database. Initially a self-hosted MongoDB instance was used as the DB but since the server would be deployed on Google Cloud Run, Firestore was used instead for deployment simplicity.
 
