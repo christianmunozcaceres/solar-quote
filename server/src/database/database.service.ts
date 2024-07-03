@@ -4,7 +4,7 @@ import { CollectionReference, getFirestore } from 'firebase-admin/firestore';
 import { ConfigService } from '@nestjs/config';
 import { apps, credential } from 'firebase-admin';
 import * as path from 'path';
-import { QuoteSchema } from './database.schemas';
+import { QuoteSchema, QuoteStatus } from './database.schemas';
 
 @Injectable()
 export class DatabaseService {
@@ -28,11 +28,14 @@ export class DatabaseService {
   }
 
   async createQuote(input: {
+    status?: QuoteStatus;
     address: string;
     totalPrice: number;
   }): Promise<QuoteSchema> {
-    const result = await this.collection.add(input);
-    return { id: result.id, ...input };
+    const { status = QuoteStatus.ESTIMATION, address, totalPrice } = input;
+    const cleanedInput = { status, address, totalPrice };
+    const result = await this.collection.add(cleanedInput);
+    return { id: result.id, ...cleanedInput };
   }
 
   async readAllQuotes(): Promise<QuoteSchema[]> {
