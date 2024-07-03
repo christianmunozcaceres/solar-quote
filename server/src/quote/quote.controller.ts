@@ -1,7 +1,9 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
+  HttpCode,
   Param,
   Patch,
   Post,
@@ -65,13 +67,25 @@ export class QuoteController {
     };
   }
 
-  @Patch(':id')
-  async patchQuote(@Param('id') id: string, @Body() quoteDTO: PatchQuoteDTO) {
-    return await this.database.editQuote({ id, data: quoteDTO });
-  }
-
   @Get()
   async getAllQuotes() {
-    return await this.database.getAllQuotes();
+    return await this.database.readAllQuotes();
+  }
+
+  @Get(':id')
+  async getQuoteById(@Param('id') id: string) {
+    return await this.database.readQuoteById(id);
+  }
+
+  @Patch(':id')
+  async patchQuote(@Param('id') id: string, @Body() quoteDTO: PatchQuoteDTO) {
+    return await this.database.updateQuote({ id, data: quoteDTO });
+  }
+
+  @Delete(':id')
+  @HttpCode(204)
+  async delteQuoteById(@Param('id') id: string) {
+    await this.database.deleteQuoteById(id);
+    return;
   }
 }

@@ -35,7 +35,7 @@ export class DatabaseService {
     return { id: result.id, ...input };
   }
 
-  async getAllQuotes(): Promise<QuoteSchema[]> {
+  async readAllQuotes(): Promise<QuoteSchema[]> {
     const snapshot = await this.collection.get();
     const result: any[] = [];
     snapshot.forEach((doc) => {
@@ -44,12 +44,21 @@ export class DatabaseService {
     return result;
   }
 
-  async editQuote(input: {
+  async readQuoteById(id: string): Promise<QuoteSchema> {
+    const data = (await this.collection.doc(id).get()).data();
+    return { id, ...data } as QuoteSchema;
+  }
+
+  async updateQuote(input: {
     id: string;
     data: Partial<QuoteSchema>;
   }): Promise<QuoteSchema> {
     await this.collection.doc(input.id).update(input.data);
     const newData = (await this.collection.doc(input.id).get()).data();
     return { id: input.id, ...newData } as QuoteSchema;
+  }
+
+  async deleteQuoteById(id: string) {
+    return await this.collection.doc(id).delete();
   }
 }
