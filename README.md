@@ -6,7 +6,15 @@ See the project live [here](https://solar-quote-byrw63ghha-lz.a.run.app)!
 
 [Server](./server/)
 
-## Program Spec
+## Why?
+
+Why did I make this project?
+
+1. I wanted to practice creating a system-spec for a use-case, and then creating a deployed MVP of that spec
+2. I wanted to try out NestJS
+3. I wanted to try making a simple UI
+
+## System Specification
 
 The basics of simple-solar-quote is that it calculates an estimation of what a solar-installation would cost. A full-fledged solar-quoation tool would have a flow that looks something like this.
 
@@ -49,6 +57,7 @@ Beyond MVP
 
 - Lifetime Savings calculations
   - Gotta estimate/collect the household-consumption
+- Show a picture of the installation (using Google Solar API)
 
 ## Further Steps
 
