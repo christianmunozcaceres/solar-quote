@@ -1,4 +1,4 @@
-export class QuoteDTO {
+export class QuoteSchema {
   constructor(input: { id: string; name: string; totalPrice: number }) {
     this.id = input.id;
     this.address = input.name;

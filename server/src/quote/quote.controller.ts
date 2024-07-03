@@ -1,7 +1,16 @@
-import { Controller, Get, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { DatabaseService } from 'src/database/database.service';
 import { GoogleSolarService } from 'src/google-solar/google-solar.service';
 import { ProductCatalogService } from 'src/product-catalog/product-catalog.service';
+import { PatchQuoteDTO } from './quote.dto';
 
 @Controller('quote')
 export class QuoteController {
@@ -54,6 +63,11 @@ export class QuoteController {
       markupCost: (materialCosts + labourCosts) * markupPercentage,
       totalCost,
     };
+  }
+
+  @Patch(':id')
+  async patchQuote(@Param('id') id: string, @Body() quoteDTO: PatchQuoteDTO) {
+    return await this.database.editQuote({ id, data: quoteDTO });
   }
 
   @Get()
