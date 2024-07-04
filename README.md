@@ -12,7 +12,33 @@ Why did I make this project?
 
 1. I wanted to practice creating a system-spec for a use-case, and then creating a deployed MVP of that spec
 2. I wanted to try out NestJS
-3. I wanted to try making a simple UI
+3. I wanted to try making a simple UI (since I'm primarily a backend-developer)
+
+## Setup
+
+Simple Solar Quote is built using NestJS together with Firestore as a database, serving the client as static HTML files together with Bootstrap.
+
+This is a portfolio project and not meant to be collaborated on, but I'll provide instructions as if.
+
+Get local environment variables as in `.env.example`
+
+Download the Google Cloud Service Account Private key (`gcp-service-account.json`) from GCP and put it in `solar-quote/server`
+
+Install dependencies
+
+```bash
+npm i
+```
+
+Run development server (with reload on file-save)
+
+```bash
+npm run start:dev
+```
+
+## Deployment and Infrastructure
+
+The server is deployed on Google Cloud Run using Google Cloud Build to deploy on merge to `master` on this repository. Database is Firestore.
 
 ## System Specification
 
