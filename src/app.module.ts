@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { QuoteController } from './quote/quote.controller';
 import { GoogleSolarService } from './google-solar/google-solar.service';
 import { QuoteModule } from './quote/quote.module';
@@ -16,12 +14,7 @@ import { join } from 'path';
     ConfigModule.forRoot({ isGlobal: true }),
     ServeStaticModule.forRoot({ rootPath: join(__dirname, '..', 'client') }),
   ],
-  controllers: [AppController, QuoteController],
-  providers: [
-    AppService,
-    GoogleSolarService,
-    ProductCatalogService,
-    DatabaseService,
-  ],
+  controllers: [QuoteController],
+  providers: [GoogleSolarService, ProductCatalogService, DatabaseService],
 })
 export class AppModule {}
