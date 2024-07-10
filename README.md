@@ -4,8 +4,6 @@ An application where you can fill in your address and get an automated quotation
 
 See the project live [here](https://solar-quote-byrw63ghha-lz.a.run.app)!
 
-[Server](./server/)
-
 ## Why?
 
 Why did I make this project?
