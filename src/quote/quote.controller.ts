@@ -37,33 +37,38 @@ export class QuoteController {
 
     const panel = this.productCatalog.getPanel();
     const inverter = this.productCatalog.getInverter();
+    const materialCostSEK = panelCount * panel.priceSEK + inverter.priceSEK;
 
-    const materialCosts = panelCount * panel.priceUSD + inverter.priceUSD;
+    const installationTimePerPanelHours = 1.25;
+    const installationCostPerHourSEK = 500;
+    const installationTimeHours = panelCount * installationTimePerPanelHours;
+    const labourCostSEK = installationTimeHours * installationCostPerHourSEK;
 
     // This should be editable in some service
-    const labourCosts = 7950;
+    const markupPercentage = 0.3;
+    const materialCostWithMarkup = materialCostSEK * (1 + markupPercentage);
+    const labourCostWithMarkup = labourCostSEK * (1 + markupPercentage);
+    const totalCostWithMarkup = materialCostWithMarkup + labourCostWithMarkup;
 
-    // This should be editable in some service
-    const markupPercentage = 0.2;
-
-    const totalCost = (materialCosts + labourCosts) * (1 + markupPercentage);
-
-    const id = await this.database.createQuote({
+    const quote = await this.database.createQuote({
       address: buildingAddress,
-      totalPrice: totalCost,
+      totalPrice: totalCostWithMarkup,
     });
 
     return {
-      id,
+      id: quote.id,
       buildingAddress,
-      material: [
-        { name: panel.name, pricePerUnit: panel.priceUSD, count: panelCount },
-        { name: inverter.name, pricePerUnit: inverter.priceUSD, count: 1 },
-      ],
-      materialCosts,
-      labourCosts,
-      markupCost: (materialCosts + labourCosts) * markupPercentage,
-      totalCost,
+      material: {
+        panelName: panel.name,
+        panelCount,
+        inverterName: inverter.name,
+      },
+      installationTimeDays: Math.ceil(installationTimeHours / 8),
+      costsWithMarkupSEK: {
+        materials: materialCostWithMarkup,
+        labour: labourCostWithMarkup,
+        total: totalCostWithMarkup,
+      },
     };
   }
 

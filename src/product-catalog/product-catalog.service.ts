@@ -8,16 +8,16 @@ import { Injectable } from '@nestjs/common';
 export class ProductCatalogService {
   getPanel() {
     return {
-      name: 'Pro Panel 400W',
-      priceUSD: 300,
-      effectWatt: 400,
+      name: 'Pro Panel 440W',
+      priceSEK: 3500,
+      effectWatt: 440,
     };
   }
 
   getInverter() {
     return {
       name: 'String Inverter 7.7',
-      priceUSD: 1750,
+      priceSEK: 25000,
       effectWatt: 7700,
     };
   }

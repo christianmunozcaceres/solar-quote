@@ -15,6 +15,13 @@
       .loading-spinner {
         display: none;
       }
+      .quote-card {
+        max-width: 80ch;
+        margin: auto;
+      }
+      .quote-card p {
+        text-align: left;
+      }
     </style>
   </head>
   <body>
@@ -63,7 +70,6 @@
     </div>
 
     <div id="success-page" class="d-none text-center mt-5">
-      <h3>Success!</h3>
       <p id="response-message"></p>
     </div>
 
@@ -100,10 +106,24 @@
 
             const result = await response.json();
 
+            responseMessage.innerHTML = `
+              <div class="card quote-card">
+                <div class="card-header">
+                  <h4>Personal Solar-Installation Quote</h4>
+                </div>
+                <div class="card-body">
+                  <p>Your installation would consist of an array of <strong>${result.material.panelCount} ${result.material.panelName}</strong>, with a <strong>${result.material.inverterName}</strong>, with a material cost of <strong>${result.costsWithMarkupSEK.materials.toLocaleString('en-US')} SEK</strong>. Considering your installation size, it would take us approximately <strong>${result.installationTimeDays} days</strong> to install, which would result in <strong>${result.costsWithMarkupSEK.labour.toLocaleString('en-US')} SEK</strong> in labour costs with our current rates. In total your installation would cost <strong>${result.costsWithMarkupSEK.total.toLocaleString('en-US')} SEK</strong> and take approximately <strong>${result.installationTimeDays} days</strong> to install.</p>
+                  <hr>
+                  <p><strong>Material Costs (${result.material.panelCount} panels and inverter):</strong> ${result.costsWithMarkupSEK.materials.toLocaleString('en-US')} SEK</p>
+                  <p><strong>Installation Costs (${result.installationTimeDays} days installation):</strong> ${result.costsWithMarkupSEK.labour.toLocaleString('en-US')} SEK</p>
+                  <p><strong>Total:</strong> ${result.costsWithMarkupSEK.total.toLocaleString('en-US')} SEK</p>
+                </div>
+              </div>
+            `;
+
             // Hide form and show success page
             document.querySelector('.card').style.display = 'none';
             successPage.classList.remove('d-none');
-            responseMessage.innerText = `Server Response: ${result}`;
           } catch (error) {
             console.error('Error:', error);
           } finally {
