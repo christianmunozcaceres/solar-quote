@@ -72,9 +72,6 @@ Everything else is just iterated upon this basic setup.
 
 Objective: Acheiving the specs for the MVP
 
-- Init the UI
-- Add Address-Select screen
-- Add Quotation-View screen
 - Add mocked Sign and Reject screens
 
 Beyond MVP
